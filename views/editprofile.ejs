@@ -1,0 +1,206 @@
+<% layout('layouts/boilerplate') %>
+<head>
+  <title>Edit Profile</title>
+</head>
+  <style>
+    body {
+    background-color: #99a8b3;
+    }
+  </style>
+  <body>
+<div class="container">
+<div class="row flex-lg-nowrap">
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%=alumni.firstname%></h4>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Profile</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form action="/editprofile" method="POST" class="form" class="needs-validation" novalidate>
+                    <% if (alumnilogin) { %>
+                    <div class="row">
+                      <div class="col">
+                        <div class="row mt-2">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              <input class="form-control" type="text" placeholder=<%=alumni.firstname%> value="<%=alumni.firstname%>" name="firstname" required>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Last Name</label>
+                              <input class="form-control" type="text" placeholder="Lastname" value="<%=alumni.lastname%>" name="lastname" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input class="form-control" type="email" placeholder="user@example.com" value="<%=alumni.email%>" name="email" required>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Branch</label>
+                              <input class="form-control" type="text" placeholder="Computer" value="<%=alumni.branch%>" name="branch" required>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Gender</label>
+                          <select class = "form-control" name="gender" required>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Contact No</label>
+                          <input class="form-control" type="tel" placeholder="contact" value="<%=alumni.contact%>" name="contact" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "row mt-2">
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Degree</label>
+                          <select class = "form-control" name="degree" selected="<%=alumni.degree%>" required>
+                            <option>B.Tech</option>
+                            <option>M.Tech</option>
+                            <option>B.E.</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Year of Graduation</label>
+                          <input class="form-control" type="number" placeholder="Year of Graduation" value="<%=alumni.yearofpassing%>" name="yearofpassing" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "row mt-2">
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Current Location</label>
+                          <input class="form-control" type="text" placeholder="Delhi" value="<%=alumni.currentlocation%>" name="currentlocation" required>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Current Position</label>
+                          <input class="form-control" type="text" value="<%=alumni.currentworking%>" name="currentworking" required>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  <% } else { %>
+                    <div class="row mt-2">
+                      <div class="col">
+                        <div class="form-group">
+                          <label>College Name</label>
+                          <input class="form-control" type="text" placeholder="College Name" value="<%=alumni.collegename%>" name="collegename" required>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input class="form-control" type="email" placeholder="Email" value="<%=alumni.collegeemail%>" name="collegeemail" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Contact</label>
+                          <input class="form-control" type="number" pattern="[0-9]{10}" placeholder="Contact" value="<%=alumni.ccontact%>" name="ccontact" required>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label>Location</label>
+                          <input class="form-control" type="text" placeholder="Location" value='<%=alumni.clocation%>'' name="clocation" required>
+                        </div>
+                      </div>
+                    </div>
+                  <% } %>
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                      <div class="mb-2"><b>Change Password</b></div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>New Password</label>
+                            <input class="form-control" id="password" onkeyup='check();' type="password" placeholder="••••••" name="password" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                            <input class="form-control" id="confirm_password" onkeyup='check();' type="password" placeholder="••••••" name="pass2" required></div>
+                        </div>
+                      </div>
+                    </div>
+                    <span id='msg'></span>
+
+                  </div>
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" id="submit">Save Changes</button>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script>
+  var check = function() {
+      if (document.getElementById('password').value ==
+        document.getElementById('confirm_password').value) {
+        
+        if (document.getElementById('password').value.length) {
+          document.getElementById('msg').style.color = 'green';
+          document.getElementById('msg').innerHTML = 'matching';
+        }
+        else {
+          document.getElementById('msg').innerHTML = '';
+        }
+        document.getElementById('submit').disabled = false;
+      } else {
+        document.getElementById('msg').style.color = 'red';
+        document.getElementById('msg').innerHTML = 'not matching';
+        document.getElementById('submit').disabled = true;
+      }
+    }
+  </script>
+</body>

@@ -1,0 +1,3 @@
+eval \$(${HOMEBREW_PREFIX}/bin/brew shellenv)
+eval \$(${HOMEBREW_PREFIX}/bin/brew shellenv)
+eval \$(${HOMEBREW_PREFIX}/bin/brew shellenv)

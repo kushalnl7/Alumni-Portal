@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/pictures/favicon.ico" type="image/gif" sizes="25x25">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <script src="https://kit.fontawesome.com/b08dd984f6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/home.css" />
+
+  <title>College Home</title>
+
+  </link>
+</head>
+
+<body style="background: #99a8b3;">
+  <%- include('./partials/navbar')%>
+  <center>
+    <div class="card text-white bg-secondary mb-3 w-50" style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;">
+      <table id="myTable" class="table table-bordered table-hover" style="border-color: black;">
+        <thead style="color: white;">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Year</th>
+            <th scope="col">Degree</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let alumni of notverified) { %>
+            <tr>
+              <th scope="row">
+                <%=alumni.firstname%>
+                  <%=alumni.lastname%>
+              </th>
+              <td>
+                <%=alumni.yearofpassing%>
+              </td>
+              <td>
+                <%=alumni.degree%>
+              </td>
+              <td>
+                <%=alumni.branch%>
+              </td>
+              <td><a href="/verifyprofile/<%= alumni._id %>"><button type="button"
+                    class="btn btn-outline-danger btn-sm">Verify account!</button></a></td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </center>
+    
+
+    <div class="container my-5">
+      <div class="card text-white bg-dark mb-3" style="background-color: #DAD9D9; border-radius: 1rem;">
+        <div class="card-header" style="font-weight: 800; font-size: 40px;">
+          Notices
+          <a href="#" class="btn btn-outline-light" data-toggle="modal"
+          data-target="#Notice" style="float: right;">Add Notice</a>
+        </div>
+        <div class="modal fade" id="Notice" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="Notice" style="color: black;">Add Notice</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="form-inline">
+                  <div class="container">
+                    <div class="form-group">
+                      <label for="NoticeDate" style="color: black;">Date:</label>
+                      <input type="Date" id="NoticeDate" class="mx-4 form-control" required>
+                      </div>
+                      <div class="form-group my-2">
+                      <label for="NoticeContent" style="color: black;">Notice:</label>
+                      <textarea class="form-control mx-2" id="NoticeContent" rows="7" required></textarea>
+                      </div>
+                    </div>
+                  </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="card text-white bg-secondary mb-3">
+        <% for (notice of College.Notices) {%>
+        <div class="card-header border-top"> Date : 
+          <%= notice.NoticeDate.toString().split("G")[0] %>
+          <a href="/deleteNotice/<%= notice._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete Notice</a>
+
+        </div>
+        <div class="card-body">
+          <p class="card-text">Notice : <%= notice.NoticeContent %></p>
+        </div>
+        <% } %>
+      </div>
+
+      </div>
+  </div>
+  </div>
+    <div class="container my-2">
+      <div class="card text-white bg-dark mb-3" style="background-color: #DAD9D9; border-radius: 1rem;">
+        <div class="card-header" style="font-weight: 800; font-size: 40px;">
+          Events
+          <a href="#" class="btn btn-outline-light" data-toggle="modal"
+          data-target="#Event" style="float: right;">Add Event</a>
+        </div>
+        <div class="modal fade" id="Event" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="Event" style="color: black;">Add Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form class="form-inline" action="/college" method="POST">
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="form-group">
+                      <label for="EventDate" style="color: black;">Date:</label>
+                      <input type="Date" id="EventDate" name="EventDate" class="form-control mx-4" required>
+                      </div>
+                      <div class="form-group my-2">
+                      <label for="EventVenue" style="color: black;">Venue:</label>
+                      <input type="Text" id="EventVenue" name="EventVenue" class="form-control mx-3" required>
+                      </div>
+                      <div class="form-group my-2">
+                      <label for="Agenda" style="color: black;">Agenda:</label>
+                      <textarea class="form-control mx-2" id="EventAgenda" name="EventAgenda" rows="7" required></textarea>
+                      </div>
+                    </div>
+                  </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      <div class="card text-white bg-secondary mb-3">
+        <% for(event of College.Events) {%>
+        <div class="card-header">Date : 
+          <%= event.EventDate.toString().split("G")[0] %>
+          <a href="/deleteevent/<%= event._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete Event</a>
+
+        </div>
+        <div class="card-body border-bottom">
+          <h6 class="card-subtitle mb-2 text-muted">Venue : <%= event.EventVenue %></h6>
+          <p class="card-text">Agenda : <%= event.EventAgenda %></p>
+        </div>
+        <% } %>
+      </div>
+      </div>
+    </div>
+
+    
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable();
+      });
+    </script>
+    
+    <script type="text/javascript" src="/js/college.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+    <br><br><br>
+      <footer class="fixed-bottom footer bg-dark py-3 mb-0">
+        <div class="container">
+            <span class="text-muted ">&copy;Alumini Portal 2020</span>
+        </div>
+    </footer> 
+
+
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+<header class="site-header" >
+  <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark" style="padding:10px;">
+      <a class="navbar-brand" style="font-size: 25px; font-family: Georgia, serif; font-weight: bold;" href="/">Alumni Portal</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto" style="font-size: 20px; font: white;">
+                    <% if(!currentUser) {%>                   
+                        <li class="nav-item dropdown active">
+                            <a href="" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">Register</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="/alumniregister" class="dropdown-item">As Alumni</a>
+                                <a href="/collegeregister" class="dropdown-item">As College</a>
+                            </div>
+                          </li>
+                        <li class="nav-item active">
+                        <a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/about-us" data-toggle="tooltip" data-placement="bottom" title="About-Us"><i class="fas fa-question fa-lg"></i> <span class="sr-only">(current)</span></a>
+                        </li>
+                        
+                    <% } else {%>
+                        <% if(currentUser.isstudent) {%>
+                            <li class="nav-item active">
+                            <a class="nav-link" href="/home">Welcome <%= currentUser.firstname%></a></li>
+                        <%} else {%>
+                            <li class="nav-item active">
+                            <a class="nav-link" href="/college">Welcome <%= currentUser.collegename%></a></li>
+                        <% } %>
+                        <li class="nav-item active">
+                        <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Locate Your Batchmates!"><i class="fas fa-map-marker-alt fa-lg"></i></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/chat" data-toggle="tooltip" data-placement="bottom" title="Chat with Your Collegemates!"><i class="fas fa-comments fa-lg"></i></a>
+                        </li>
+                        <% if (currentUser.acollegename) { %>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/contact-us" data-toggle="tooltip" data-placement="bottom" title="Contact Us"><i class="fas fa-paper-plane fa-lg"></i></a>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/searchalumni" data-toggle="tooltip" data-placement="bottom" title="Search Alumni"><i class="fa fa-search fa-lg"></i></a>
+                            </li>
+                        <% } %>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/profile" data-toggle="tooltip" data-placement="bottom" title="Your Information"><i class="fas fa-user-circle fa-lg"></i></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt fa-lg"></i></a>
+                        </li>                  
+					<% } %>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</header>

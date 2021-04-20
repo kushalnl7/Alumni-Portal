@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/pictures/favicon.ico" type="image/gif" sizes="25x25">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://kit.fontawesome.com/b08dd984f6.js" crossorigin="anonymous"></script>
+    <title>Alumni Portal</title>
+    <script>
+        $(function () {
+            var $select = $(".1970-2020");
+                var k = "Passing Year"
+                $select.append($('<option></option>').val(k).html(k))
+            for (i = 1970; i <= 2020; i++) {
+                $select.append($('<option></option>').val(i).html(i))
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <body class="d-flex flex-column vh-100" style="background: #99a8b3;">
+        <%- include('./partials/navbar')%>
+        <br>
+        <div class="container">
+            <form action="/searchalumni" method="POST">
+                <div class="form-row align-items-center">
+                    
+                    <div class="col-auto my-1">
+                        <select class="1970-2020 custom-select mr-sm-2" id="inlineFormCustomSelect1" name="yearofpassing"></select>
+                    </div>
+                    <div class="col-auto my-1">
+                       
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect2" name="degree">
+                            <option selected>Degree</option>
+                            <option>B.Tech</option>
+                            <option>M.Tech</option>
+                            <option>B.E.</option>
+                            <option>M.E.</option>
+                            <option>M.S.</option>
+                            <option>MBA</option>
+                            <option>BBA</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                       
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect3" name="branch">
+                            <option>Branch</option>
+                            <option>Computer & IT</option>
+                            <option>Electrical</option>
+                            <option>Entc</option>
+                            <option>Instrumentation</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                            <option>Production</option>
+                            <option>Metallurgy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container" style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;">
+            <table id="myTable" class="table table-bordered table-hover" style="border-color: black;">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Current Working</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Connect with Alumnus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let user of alumni) { %>
+                    <tr>
+                        <th scope="row"><%=user.firstname%> <%=user.lastname%></th>
+                        <td><%=user.currentworking%></td>
+                        <td><%=user.currentlocation%></td>
+                        <td><%=user.email%></td>
+                        <td><%=user.contact%></td>
+                        <td><a href="/sendmail/<%= user._id %>"><button type="button"
+                            class="btn btn-outline-success btn-sm">Send Mail</button></a></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <footer class="footer bg-dark py-3 mt-auto">
+            <div class="container">
+                <span class="text-muted">&copy;Alumini Portal 2020</span>
+            </div>
+        </footer>
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

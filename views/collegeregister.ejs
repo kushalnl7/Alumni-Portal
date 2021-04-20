@@ -1,0 +1,97 @@
+<% layout('layouts/boilerplate') %>
+<head>
+    <title>College Registration</title>
+    <link rel="stylesheet" href="/css/login.css">
+
+    <script>
+        $(document).ready(function () {
+            $('#birth-date').mask('00/00/0000');
+            $('#phone-number').mask('0000-0000');
+        })
+    </script>
+
+</head>
+
+
+<body class="d-flex flex-column vh-100" style="background: #99a8b3;">
+
+    <br>
+
+    <div class="registration-form">
+        <form action="/register" method="POST" class="needs-validation" novalidate>
+            <div class="form-icon">
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            <h5 style="text-align: center; font-size: 35px; margin-bottom: 25px;">Register your college here!</h5>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="College Name" placeholder="College Name" name="collegename" required> 
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" class="form-control item" id="E-mail" placeholder="E-mail" name="collegeemail" required>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" onkeyup='check();' class="form-control item" placeholder="Password" name="cpass1" required>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm_password" onkeyup='check();' class="form-control item" placeholder="Confirm Password" name="cpass2" required>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <span id='msg'></span>
+            </div>
+            <div class="form-group">
+                <input type="text" pattern="[0-9]{10}" class="form-control item" id="Contact" placeholder="Contact" name="ccontact" required>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="Location" placeholder="Location" name="clocation" required>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  
+                  
+            </div>
+            <hr>
+            <div class="form-group" style="margin-top: 30px; background-color: #5891ff; border-radius: 10px;">
+                <button type="submit" id="submit" class="btn btn-block">Create Account</button>
+            </div>
+            <div class="form-group" style="text-align: center;">
+                <a href="/login" style="color: gray;">Already have account! Login</a>
+            </div>
+        </form>
+        
+    </div>
+    <script>
+    var check = function() {
+        if (document.getElementById('password').value ==
+          document.getElementById('confirm_password').value) {
+            if (document.getElementById('password').value.length) {
+            document.getElementById('msg').style.color = 'green';
+            document.getElementById('msg').innerHTML = 'matching';
+            }
+            else {
+            document.getElementById('msg').innerHTML = '';
+            }
+          document.getElementById('submit').disabled = false;
+        } else {
+          document.getElementById('msg').style.color = 'red';
+          document.getElementById('msg').innerHTML = 'not matching';
+          document.getElementById('submit').disabled = true;
+        }
+      }
+    </script>
+    <br>
+
+</body>
