@@ -29,7 +29,7 @@ const io = socketio(server);
 
 const botName = 'ChatBox';
 
-mongoose.connect('mongodb://localhost:27017/Alumini_tracker',{
+mongoose.connect('mongodb+srv://mnarora:Pass@1234@cluster0.xdwit.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
     useNewUrlParser : true,
     useCreateIndex: true,
     useUnifiedTopology:true,
@@ -379,6 +379,7 @@ app.get("/about-us", (req, res) => {
 
 app.post("/collegeNotice", isLoggedIn, async (req,res) => {
     if(req.user) {
+        console.log(req.body)
         const college = await User.findById(req.user._id);
         const notice = new Notice(req.body)
         college.Notices.push(notice);
@@ -422,7 +423,7 @@ app.post("/collegeEvent", async (req,res) => {
 
 app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: 'login' }), async (req, res) => {
     var df = '';
-    await User.find({'username' : req.body.username},'name skill', function(err,docs){
+    const user = await User.find({'username' : req.body.username},'name skill', function(err,docs){
         if (err) {
             req.flash('error', err.message);
             console.log('error occured in the database');
@@ -430,8 +431,10 @@ app.post('/login', passport.authenticate('local', { failureFlash: true, failureR
         df = docs;
     });
 
+    console.log('df ' + df);
     temp = await User.findById(df).exec();
-    console.log(temp.contact);
+    console.log(temp);
+    console.log(temp.ccontact);
     
     if (temp.isstudent) {
         req.flash('success', 'welcome back!');
@@ -441,42 +444,10 @@ app.post('/login', passport.authenticate('local', { failureFlash: true, failureR
         req.flash('success', 'welcome back!');
         return res.redirect('/college');
     }
-    messagebird.verify.create(temp.contact, {
-        template: "Your verification code is %token."
-    }, function(err, response) {
-        if (err) {
-            //console.log(err);
-            console.log("Error Occured");
-        }
-        else {
-            //console.log(response);
-            console.log("Inside else");
-            return res.render('verifyotp', {id : response.id});
-        }
-    })
+    
     //console.log(temp.password);
     
 
-})
-
-app.post('/verifyotp', (req, res) => {
-    messagebird.verify.verify(req.body.id, req.body.token, function(err, response) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            console.log(req.user);
-            if (req.user.isstudent) {
-                req.flash('success', 'welcome back!');
-                return res.redirect('/home');
-            }
-            else {
-                req.flash('success', 'welcome back!');
-                return res.redirect('/college');
-            }
-        }
-        
-    })
 })
 
 app.post("/register", async (req, res) => {
