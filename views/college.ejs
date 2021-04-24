@@ -69,16 +69,19 @@
           <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#Notice" style="float: right;">Add
             Notice</a>
         </div>
-        <div class="modal fade" id="Notice" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal fade" id="Notice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="Notice" style="color: black;">Add Notice</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
+
                 <form class="form-inline" action="/collegeNotice" method="POST">
                   <div class="container">
                     <div class="form-group">
@@ -87,42 +90,44 @@
                     </div>
                     <div class="form-group my-2">
                       <label for="NoticeContent" style="color: black;">Notice:</label>
-                      <textarea class="form-control mx-2" name="NoticeContent" id="NoticeContent" rows="7"
-                        required></textarea>
+                      <textarea class="form-control mx-2" name="NoticeContent" id="NoticeContent" rows="7" required></textarea>
                     </div>
                   </div>
-              </div>
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
-              </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
                 </form>
-
-
+                
               </div>
             </div>
           </div>
         </div>
-        <div class="card text-white bg-secondary mb-3">
-          <% for (notice of College.Notices) {%>
-            <div class="card-header border-top"> Date :
-              <% if (notice.NoticeDate) {%>
-                <%= notice.NoticeDate.toString().split("G")[0] %>
-                  <% } %>
-                    <a href="/deleteNotice/<%= notice._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete
-                      Notice</a>
 
-            </div>
-            <div class="card-body">
-              <p class="card-text">Notice : <%= notice.NoticeContent %>
-              </p>
-            </div>
-            <% } %>
-        </div>
+
 
       </div>
+      <div class="card text-white bg-secondary mb-3">
+        <% for (notice of College.Notices) {%>
+          <div class="card-header border-top"> Date :
+            <% if (notice.NoticeDate) {%>
+              <%= notice.NoticeDate.toString().split("G")[0] %>
+                <% } %>
+                  <a href="/deleteNotice/<%= notice._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete
+                    Notice</a>
+
+          </div>
+          <div class="card-body">
+            <p class="card-text">Notice : <%= notice.NoticeContent %>
+            </p>
+          </div>
+          <% } %>
+      </div>
+
     </div>
-    </div>
+
+
+
+
     <div class="container my-2">
       <div class="card text-white bg-dark mb-3" style="background-color: #DAD9D9; border-radius: 1rem;">
         <div class="card-header" style="font-weight: 800; font-size: 40px;">
