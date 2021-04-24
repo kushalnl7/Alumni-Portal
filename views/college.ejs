@@ -135,17 +135,20 @@
           <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#Event" style="float: right;">Add
             Event</a>
         </div>
-        <div class="modal fade" id="Event" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal fade" id="Event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="Event" style="color: black;">Add Event</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form class="form-inline" action="/college" method="POST">
-                <div class="modal-body">
+              <div class="modal-body">
+
+              <form class="form-inline" action="/collegeEvent" method="POST">
                   <div class="container">
                     <div class="form-group">
                       <label for="EventDate" style="color: black;">Date:</label>
@@ -161,15 +164,16 @@
                         required></textarea>
                     </div>
                   </div>
-                </div>
-
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-                </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
               </form>
             </div>
           </div>
         </div>
+      </div>
+      </div>
+
         <div class="card text-white bg-secondary mb-3">
           <% for(event of College.Events) {%>
             <div class="card-header">Date :
@@ -188,7 +192,6 @@
             </div>
             <% } %>
         </div>
-      </div>
     </div>
 
 

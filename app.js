@@ -379,7 +379,7 @@ app.get("/about-us", (req, res) => {
 
 app.post("/collegeNotice", isLoggedIn, async (req,res) => {
     if(req.user) {
-        console.log(req.body)
+        // console.log(req.body)
         const college = await User.findById(req.user._id);
         const notice = new Notice(req.body)
         college.Notices.push(notice);
@@ -408,12 +408,13 @@ app.get("/deleteevent/:id", isLoggedIn, async (req,res) => {
 
 app.post("/collegeEvent", async (req,res) => {
     if(req.user) {
+        // console.log(req.body)
         const college = await User.findById(req.user._id);
         const event = new Event(req.body)
         college.Events.push(event);
         await event.save();
         await college.save();
-        
+        res.redirect("/college");
     }
     else {
         console.log("no id")
