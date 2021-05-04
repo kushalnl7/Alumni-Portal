@@ -156,7 +156,7 @@ io.on('connection', socket => {
   
   
   
-  var PORT =  3000;
+  var PORT =  proces.env.PORT || 3000;
 
 app.get("/home", isLoggedIn, async (req, res) => {
     const member = await User.findById(req.user._id);
