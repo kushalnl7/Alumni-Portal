@@ -520,11 +520,13 @@ app.post('/sendmessage/:id', async (req, res) => {
 })
 
 
-app.get("/sendmail/:id", async (req, res) => {
+app.get("/sendmail/:id",isLoggedIn, async (req, res) => {
     res.render('sendmail', {'id':req.params.id});
 })
 
 app.post('/sendmail/:id', async (req, res) => {
+    console.log(process.env)
+    console.log(req.body)
     var transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
@@ -576,7 +578,7 @@ app.get("/chat", isLoggedIn,(req,res) => {
     res.render("index.ejs");
 })
 
-app.get("/chatroom", (req,res) => {
+app.get("/chatroom", isLoggedIn, (req,res) => {
     res.render("chat.ejs", {user :req.body.username, room : req.body.collegename})
 })
 

@@ -116,8 +116,9 @@
 <div class="container" style="margin-bottom: -20px; color: black;">
 <center><h2><b>NOTICES</b></h2></div></center>
 </div>
-<div class="container" style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;">
-    <table id="myTable1" class="table table-bordered table-hover table-responsive" style="border-color: black;">
+<div style="margin-top:20px; margin-bottom: 20px;">
+    <div style="padding: 20px; background-color: white; border-radius: 10px;" class="table-responsive container">
+    <table id="myTable1" class="table table-bordered table-hover" style="border-color: black;">
         <thead>
             <tr>
                 <th scope="col">Notice</th>
@@ -129,9 +130,11 @@
             </tr>
         </thead>
         <tbody>
+            <% if(college[0].Notices) {%>
+                <% for (notice of college[0].Notices) {%>
             <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
+                <th scope="row"><%= notice.NoticeContent %></th>
+                <td><%= notice.NoticeDate.toString().split("G")[0] %></td>
                 <!-- <td>manish</td>
                 <td>manish</td>
                 <td>manish</td> -->
@@ -139,70 +142,23 @@
                     class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
                     
             </tr>
-            <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
-                <!-- <td>manish</td>
-                <td>manish</td>
-                <td>manish</td> -->
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
-                <!-- <td>manish</td>
-                <td>manish</td>
-                <td>manish</td> -->
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
-                <!-- <td>manish</td>
-                <td>manish</td>
-                <td>manish</td> -->
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
-                <!-- <td>manish</td>
-                <td>manish</td>
-                <td>manish</td> -->
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice. This is a notice.</th>
-                <td>10/02/2021</td>
-                <!-- <td>manish</td>
-                <td>manish</td>
-                <td>manish</td> -->
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
+            <% }} %>  
         </tbody>
     </table>
+</div>
 </div>
 <script>
     $(document).ready(function () {
         $('#myTable1').DataTable();
     });
 </script>
-<div class="container" style="margin-bottom: -20px; margin-top: 30px; color: black;">
+<div class="container" style="margin-bottom: -20px; margin-top: 10px; color: black;">
     <center><h2><b>EVENTS</b></h2></div></center>
     </div>
     <!-- <div class="table table-responsive"> -->
-<div class="container" style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;">
-    <table id="myTable2" class="table table-bordered table-hover table-responsive" style="border-color: black;">
+        <div style="margin-top:20px; margin-bottom: 20px;">
+            <div style="padding: 20px; background-color: white; border-radius: 10px;" class="table-responsive container">
+                <table id="myTable2" class="table table-bordered table-hover " style="border-color: black;">
         <thead>
             <tr>
                 <th scope="col">Agenda</th>
@@ -214,58 +170,18 @@
             </tr>
         </thead>
         <tbody>
+            <% if(college[0].Events) {%>
+                <% for (event of college[0].Events) {%>
             <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
+                <th scope="row"><%= event.EventAgenda %></th>
+                <td><%= event.EventVenue %></td>
+                <td><%= event.EventDate.toString().split("G")[0] %></td>
             </tr>
-            <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
-            <tr>
-                <th scope="row">This is a event. This is a event. This is a event.This is a event.This is a event. This is a event. This is a event. This is a event. This is a event. This is a event. This is a event.</th>
-                <td>Pune</td>
-                <td>20/03/2021</td>
-                <!-- <td><a href="jd"><button type="button"
-                    class="btn btn-outline-success btn-sm">Send Mail</button></a></td> -->
-                    
-            </tr>
+            <% }} %> 
         </tbody>
     </table>
 </div>
-<!-- </div> -->
+</div>
 <script>
     $(document).ready(function () {
         $('#myTable2').DataTable();
@@ -383,7 +299,7 @@ crossorigin="anonymous"></script> -->
     
 
       <div class="contact-wrap container">
-        <div class="contact-in-img contact-in border border-dark">
+        <!-- <div class="contact-in-img contact-in border border-dark">
             <h1>Contact Info</h1>
             <h2><i class="fa fa-phone" aria-hidden="true"></i> Phone</h2>
             <p><%= currentUser.contact %></p>
@@ -397,7 +313,7 @@ crossorigin="anonymous"></script> -->
                 <li><a href="#"><i class="fa fa-google" aria-hidden="true"></i></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
             </ul>
-        </div>
+        </div> -->
         <!-- <div class="contact-in border border-dark">
             <h1>Send a Message</h1>
             <form action="/sendmessage" method="POST">
