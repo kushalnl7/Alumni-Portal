@@ -5,7 +5,6 @@ const ejsMate = require('ejs-mate');
 const mongoose = require("mongoose");
 const passport = require('passport');
 const localStrategy = require('passport-local');
-//var auth = require('passport-local-authenticate');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const messagebird = require('messagebird')('thsMs0oPRrJbNEbwegMHgnFPp');
@@ -419,6 +418,8 @@ app.post("/collegeEvent", async (req,res) => {
 
 
 app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: 'login' }), async (req, res) => {
+    try {
+    console.log(req.body)
     var df = '';
     const user = await User.find({'username' : req.body.username},'name skill', function(err,docs){
         if (err) {
@@ -441,7 +442,11 @@ app.post('/login', passport.authenticate('local', { failureFlash: true, failureR
         req.flash('success', 'welcome back!');
         return res.redirect('/college');
     }
-    
+}
+    catch(err) {
+        console.log(err)
+        res.send(err)
+    }
     //console.log(temp.password);
     
 
