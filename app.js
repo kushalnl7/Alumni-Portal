@@ -28,8 +28,9 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const botName = 'ChatBox';
+require('dotenv').config();
 
-mongoose.connect('mongodb+srv://mnarora:Pass@1234@cluster0.xdwit.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser : true,
     useCreateIndex: true,
     useUnifiedTopology:true,
@@ -369,11 +370,6 @@ app.get("/about-us", (req, res) => {
     res.render('about-us.ejs');
 })
 
-// app.post("/login", passport.authenticate("local",{
-// 	successRedirect: "/home",
-// 	failureRedirect: "/"
-// 	}),function(req,res){
-// })
 
 
 
@@ -530,15 +526,17 @@ app.get("/sendmail/:id", async (req, res) => {
 
 app.post('/sendmail/:id', async (req, res) => {
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: false,
         auth: {
-          user: 'wethestockedpantry@gmail.com',
-          pass: 'Thestockedpantry@1234'
+          user: process.env.EMAIL_ID,
+          pass: process.env.EMAIL_PASS
         }
       });
       var alumni = await User.findById(req.params.id);
       var mailOptions = {
-        from: 'wethestockedpantry@gmail.com',
+        from: process.env.EMAIL_ID,
         to: alumni.email,
         subject: req.body.subject,
         text: req.body.mailbody

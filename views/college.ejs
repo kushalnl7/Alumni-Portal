@@ -24,10 +24,12 @@
 <body style="background: #99a8b3;">
   <%- include('./partials/navbar')%>
     <center>
-      <div class="card text-white bg-secondary mb-3 w-50"
-        style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;">
-        <table id="myTable" class="table table-bordered table-hover" style="border-color: black;">
-          <thead style="color: white;">
+      <!-- <div class="card text-white bg-light mb-3 w-50"
+        style="background-color: #DAD9D9; padding: 20px; border-radius: 20px; margin-top: 20px;"> -->
+        <div style="margin-top:50px; margin-bottom: 50px;">
+        <div style="padding: 20px; background-color: white; border-radius: 10px;" class="table-responsive container">
+        <table id="myTable" class="table table-bordered table-hover " style="border-color: black;">
+          <thead style="color: black;">
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Year</th>
@@ -40,8 +42,7 @@
             <% for (let alumni of notverified) { %>
               <tr>
                 <th scope="row">
-                  <%=alumni.firstname%>
-                    <%=alumni.lastname%>
+                  <%=alumni.firstname%> <%=alumni.lastname%>
                 </th>
                 <td>
                   <%=alumni.yearofpassing%>
@@ -59,23 +60,28 @@
           </tbody>
         </table>
       </div>
+    </div>
+      <!-- </div> -->
     </center>
-
-
-    <div class="container my-5">
-      <div class="card text-white bg-dark mb-3" style="background-color: #DAD9D9; border-radius: 1rem;">
-        <div class="card-header" style="font-weight: 800; font-size: 40px;">
-          Notices
-          <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#Notice" style="float: right;">Add
-            Notice</a>
+    <div class="container">
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h1 class="mb-0">
+            <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 30px;">
+              Notices
+            </button>
+            <a href="#" class="btn btn-outline-dark mt-2" data-toggle="modal" data-target="#Notice" style="float: right;">Add
+              Notice</a>
+          </h1>
         </div>
-
+        
         <div class="modal fade" id="Notice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Notice</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -86,15 +92,15 @@
                   <div class="container">
                     <div class="form-group">
                       <label for="NoticeDate" style="color: black;">Date:</label>
-                      <input type="Date" name="NoticeDate" id="NoticeDate" class="mx-4 form-control" required>
+                      <input type="Date" name="NoticeDate" id="NoticeDate" class="form-control my-1" style="width: 100%;" required>
                     </div>
-                    <div class="form-group my-2">
+                    <div class="form-group my-3">
                       <label for="NoticeContent" style="color: black;">Notice:</label>
-                      <textarea class="form-control mx-2" name="NoticeContent" id="NoticeContent" rows="7" required></textarea>
+                      <textarea class="form-control my-1" name="NoticeContent" id="NoticeContent" rows="7" style="width: 100%;" required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                   </div>
                 </form>
                 
@@ -102,46 +108,47 @@
             </div>
           </div>
         </div>
-
-
-
-      </div>
-      <div class="card text-white bg-secondary mb-3">
-        <% for (notice of College.Notices) {%>
-          <div class="card-header border-top"> Date :
-            <% if (notice.NoticeDate) {%>
-              <%= notice.NoticeDate.toString().split("G")[0] %>
-                <% } %>
-                  <a href="/deleteNotice/<%= notice._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete
-                    Notice</a>
-
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card bg-light mb-3" style="background-color: #000; border-radius: 1rem;">
+    
+    
+    
+          
+          <div class="card bg-light mb-3">
+            <% for (notice of College.Notices) {%>
+              <div class="card-header border-top"> Date :
+                <% if (notice.NoticeDate) {%>
+                  <%= notice.NoticeDate.toString().split("G")[0] %>
+                    <% } %>
+                      <a href="/deleteNotice/<%= notice._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete
+                        Notice</a>
+    
+              </div>
+              <div class="card-body">
+                <p class="card-text">Notice : <%= notice.NoticeContent %>
+                </p>
+              </div>
+              <% } %>
           </div>
-          <div class="card-body">
-            <p class="card-text">Notice : <%= notice.NoticeContent %>
-            </p>
-          </div>
-          <% } %>
-      </div>
-
-    </div>
-
-
-
-
-    <div class="container my-2">
-      <div class="card text-white bg-dark mb-3" style="background-color: #DAD9D9; border-radius: 1rem;">
-        <div class="card-header" style="font-weight: 800; font-size: 40px;">
-          Events
-          <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#Event" style="float: right;">Add
-            Event</a>
         </div>
-
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 30px;">
+              Events
+            </button>
+            <a href="#" class="btn btn-outline-dark mt-2" data-toggle="modal" data-target="#Event" style="float: right;">Add
+              Event</a>
+          </h2>
+        </div>
         <div class="modal fade" id="Event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Events</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -152,48 +159,66 @@
                   <div class="container">
                     <div class="form-group">
                       <label for="EventDate" style="color: black;">Date:</label>
-                      <input type="Date" id="EventDate" name="EventDate" class="form-control mx-4" required>
+                      <input type="Date" id="EventDate" name="EventDate" class="form-control my-1" style="width: 100%;" required>
                     </div>
-                    <div class="form-group my-2">
+                    <div class="form-group my-3">
                       <label for="EventVenue" style="color: black;">Venue:</label>
-                      <input type="Text" id="EventVenue" name="EventVenue" class="form-control mx-3" required>
+                      <input type="Text" id="EventVenue" name="EventVenue" class="form-control my-1" style="width: 100%;" required>
                     </div>
-                    <div class="form-group my-2">
+                    <div class="form-group my-3">
                       <label for="Agenda" style="color: black;">Agenda:</label>
-                      <textarea class="form-control mx-2" id="EventAgenda" name="EventAgenda" rows="7"
+                      <textarea class="form-control my-1" id="EventAgenda" name="EventAgenda" rows="7" style="width: 100%;"
                         required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                   </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      </div>
-
-        <div class="card text-white bg-secondary mb-3">
-          <% for(event of College.Events) {%>
-            <div class="card-header">Date :
-              <% if (event.EventDate) {%>
-                <%= event.EventDate.toString().split("G")[0] %>
-                  <% } %>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card bg-light mb-3" style="background-color: #000; border-radius: 1rem;">
+            
+    
+          
+          <div class="card mb-3">
+              <% for(event of College.Events) {%>
+                <div class="card-header">Date :
+                  <% if (event.EventDate) {%>
+                    <%= event.EventDate.toString().split("G")[0] %>
+                    <% } %>
                     <a href="/deleteevent/<%= event._id %>" class="btn btn-danger btn-sm" style="float: right;">Delete
                       Event</a>
-
-            </div>
-            <div class="card-body border-bottom">
-              <h6 class="card-subtitle mb-2 text-muted">Venue : <%= event.EventVenue %>
-              </h6>
-              <p class="card-text">Agenda : <%= event.EventAgenda %>
-              </p>
-            </div>
-            <% } %>
+                      
+                    </div>
+                    <div class="card-body border-bottom">
+                      <h6 class="card-subtitle mb-2 text-muted">Venue : <%= event.EventVenue %>
+                      </h6>
+                      <p class="card-text">Agenda : <%= event.EventAgenda %>
+                      </p>
+                    </div>
+                    <% } %>
+                  </div>
         </div>
+      </div>
+      
     </div>
+    </div>
+    
+    
+  
 
+
+
+
+    <div class="container my-2">
+      
+            </div>
+            
+          </div>
 
     <script>
       $(document).ready(function () {
