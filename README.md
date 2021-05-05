@@ -5,5 +5,6 @@ To Run the project run the following commands:
 
   npm install
 
-nodemon app.js
+  nodemon app.js  
   
+You can find the project live <a href="https://connect-alumni.herokuapp.com/" target="_blank">here</a>  
