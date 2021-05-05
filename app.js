@@ -220,15 +220,17 @@ app.get('/verifyprofile/:id', isLoggedIn, async (req, res) => {
 
 app.get('/verifyaccount/:id', isLoggedIn, async (req, res) => {
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: false,
         auth: {
-          user: 'wethestockedpantry@gmail.com',
-          pass: 'Thestockedpantry@1234'
-        }
+            user: process.env.EMAIL_ID,
+            pass: process.env.EMAIL_PASS
+          }
       });
       var alumni = await User.findById(req.params.id);
       var mailOptions = {
-        from: 'wethestockedpantry@gmail.com',
+        from: process.env.EMAIL_ID,
         to: alumni.email,
         subject: 'Regarding Account Verification',
         text: `\nCongratulations Your account was verified as alumnus of ${req.user.collegename}.\nNow you can enjoy full range of services on the Portal.\n\nRegards,${req.user.collegename}\n${req.user.clocation}\n`
@@ -418,7 +420,6 @@ app.post("/collegeEvent", async (req,res) => {
 
 
 app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: 'login' }), async (req, res) => {
-    try {
     console.log(req.body)
     var df = '';
     const user = await User.find({'username' : req.body.username},'name skill', function(err,docs){
@@ -428,12 +429,8 @@ app.post('/login', passport.authenticate('local', { failureFlash: true, failureR
         }
         df = docs;
     });
-
-    console.log('df ' + df);
+    console.log('df ' + df)
     temp = await User.findById(df).exec();
-    console.log(temp);
-    console.log(temp.ccontact);
-    
     if (temp.isstudent) {
         req.flash('success', 'welcome back!');
         return res.redirect('/home');
@@ -442,11 +439,9 @@ app.post('/login', passport.authenticate('local', { failureFlash: true, failureR
         req.flash('success', 'welcome back!');
         return res.redirect('/college');
     }
-}
-    catch(err) {
-        console.log(err)
-        res.send(err)
-    }
+    
+    console.log(temp);
+    console.log(temp.ccontact);
     //console.log(temp.password);
     
 
@@ -500,15 +495,17 @@ app.get('/logout', (req, res) => {
 
 app.post('/sendmessage/:id', async (req, res) => {
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: false,
         auth: {
-          user: 'wethestockedpantry@gmail.com',
-          pass: 'Thestockedpantry@1234'
-        }
+            user: process.env.EMAIL_ID,
+            pass: process.env.EMAIL_PASS
+          }
       });
 
       var mailOptions = {
-        from: 'wethestockedpantry@gmail.com',
+        from: process.env.EMAIL_ID,
         to: 'mnarora2000@gmail.com',
         subject: 'Query regarding alumniportal',
         text: `From - ${req.body.name}\nEmail - ${req.body.email}\n${req.body.message}`
