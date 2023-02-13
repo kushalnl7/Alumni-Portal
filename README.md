@@ -56,15 +56,15 @@ In the **GITAM Web-A-Thon** hosted by **AppTechTell** on **18-19 December 2020**
 
 ## Application Screenshots:
 ### Landing Page:  
-<img src="screenshots/LandingPage1.jpeg"  width="1100" height="600">
-<img src="screenshots/LandingPage2.jpeg"  width="1100" height="600">
+<img src="screenshots/LandingPage1.jpeg"  width="1100" height="500">
+<img src="screenshots/LandingPage2.jpeg"  width="1100" height="500">
 
 ### Alumni Home Page:
-<img src="screenshots/AlumniHomePage1.png"  width="1100" height="600">
-<img src="screenshots/AlumniHomePage2.png"  width="1100" height="600">
+<img src="screenshots/AlumniHomePage1.png"  width="1100" height="500">
+<img src="screenshots/AlumniHomePage2.png"  width="1100" height="500">
 
 ### Chat Room:
-<img src="screenshots/ChatRoom.png"  width="1100" height="600">
+<img src="screenshots/ChatRoom.png"  width="1100" height="500">
 
 ### College Alumni List:
-<img src="screenshots/CollegeStudentsList.jpeg"  width="1100" height="600">
+<img src="screenshots/CollegeStudentsList.jpeg"  width="1100" height="500">
