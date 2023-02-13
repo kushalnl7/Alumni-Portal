@@ -1,3 +1,7 @@
-package-lock.json
+node_modules
+build
+npm-debug.log
+.nyc
 .env
-node_modules/
+.DS_Store
+package-lock.json
