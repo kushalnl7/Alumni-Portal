@@ -31,6 +31,7 @@ In the **GITAM Web-A-Thon** hosted by **AppTechTell** on **18-19 December 2020**
 -   Alumnus can register by choosing the college they graduated from and get features like interacting with batchmates & college authorities, attending events, locating their batchmates
 
 ## UseCase Diagram:
+<img src="screenshots/UseCase.png"  width="640" height="700">
 
 ## Tech Stack:
 
@@ -54,3 +55,16 @@ In the **GITAM Web-A-Thon** hosted by **AppTechTell** on **18-19 December 2020**
 -	Go to http://localhost:3000 to access the application. 
 
 ## Application Screenshots:
+### Landing Page:  
+<img src="screenshots/LandingPage1.jpeg"  width="1100" height="600">
+<img src="screenshots/LandingPage2.jpeg"  width="1100" height="600">
+
+### Alumni Home Page:
+<img src="screenshots/AlumniHomePage1.png"  width="1100" height="600">
+<img src="screenshots/AlumniHomePage2.png"  width="1100" height="600">
+
+### Chat Room:
+<img src="screenshots/ChatRoom.png"  width="1100" height="600">
+
+### College Alumni List:
+<img src="screenshots/CollegeStudentsList.jpeg"  width="1100" height="600">
